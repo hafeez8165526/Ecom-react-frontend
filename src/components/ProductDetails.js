@@ -15,7 +15,7 @@ function ProductDetails(props) {
   
   const addItemToCart = async (hero) => {
     const add = await axios.post(
-      `https://ecom2-backend.herokuapp.com/products/cart/${localStorage.getItem("uname")}/${
+      `http://localhost:8089/products/cart/${localStorage.getItem("uname")}/${
         product.uniq_Id
       }`,
       {},
@@ -49,7 +49,7 @@ function ProductDetails(props) {
   }, []);
 
   const getProduct = async () => {
-    const url = "https://ecom2-backend.herokuapp.com/products/" + id;
+    const url = "http://localhost:8089/products/" + id;
     const req = await axios.get(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

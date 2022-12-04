@@ -13,13 +13,13 @@ function Login() {
   const { reset } = useParams();
   const fetchToken = async () => {
     try {
-      const token = await axios.post("https://ecom2-auth.herokuapp.com/auth/login", {
+      const token = await axios.post("http://localhost:8081/auth/login", {
         userName: username,
         password: password,
       });
       localStorage.setItem("token", JSON.stringify(token.data));
       const saveUser = await axios.post(
-        `https://ecom2-backend.herokuapp.com/save/${username}/${password}`,
+        `http://localhost:8089/save/${username}/${password}`,
         {},
         {
           headers: {

@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import { CartProvider, useCart } from "react-use-cart";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +15,8 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Navabar from "./components/Navabar";
 import Cart from './components/Cart';
+import CheckOut from './components/CheckOut';
+
 function App() {
   const [getId, setgetHeroId] = useState("");
   const [heroClicked, setheroClicked] = useState(false);
@@ -40,6 +41,7 @@ function App() {
               element={<ShowProducts className="show-heroes" />}
             />
              <Route path="/cart" element={<Cart />} />
+             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/viewProduct/*" element={<HeroDetails />} />
           </Routes>
         </BrowserRouter>

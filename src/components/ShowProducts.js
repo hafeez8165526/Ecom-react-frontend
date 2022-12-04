@@ -6,6 +6,7 @@ import {
   useLocation,
   Link,
 } from "react-router-dom";
+import {Pagination} from '@mui/material'
 import "animate.css";
 import Footer from "./Footer";
 import axios from "axios";
@@ -23,13 +24,14 @@ const gradients = [
 
 function ShowProducts(props) {
   const [products, setProducts] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
   const [loaded, setloaded] = useState(false);
   const [sideMenuClass, setsideMenuClass] = useState(
     " row menu rounded-box w-36 bg-base-200 absolute right-8 top-26 "
   );
   const navi = useNavigate();
   const getProducts = async () => {
-    const req = await axios.get("https://ecom2-backend.herokuapp.com/products/all", {
+    const req = await axios.get("http://localhost:8089/products/all", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -39,7 +41,7 @@ function ShowProducts(props) {
   };
   const getProductsByCateogry = async (category) => {
     console.log(category)
-    const req = await axios.get(`https://ecom2-backend.herokuapp.com/products/all/${category}`, {
+    const req = await axios.get(`http://localhost:8089/products/all/${category}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -62,7 +64,7 @@ function ShowProducts(props) {
 
   const addItemToCart = async (product) => {
     const add = await axios.post(
-      `https://ecom2-backend.herokuapp.com/products/cart/${localStorage.getItem("uname")}/${
+      `http://localhost:8089/products/cart/${localStorage.getItem("uname")}/${
         product.uniq_Id
       }`,
       {},
@@ -73,6 +75,9 @@ function ShowProducts(props) {
       }
     );
   };
+  // window.onscroll=((e)=>{
+  //   console.log(window.document.defaultView.scrollY)
+  // })
 
   useEffect(() => {
     return () => {
@@ -86,8 +91,9 @@ function ShowProducts(props) {
       {loaded === false ? (
         <LoadingLogo />
       ) : (
-        <>
-        <section className="container bg p-7 w-5/6 text-center mt-3">
+        <div className="show">
+
+        <section className=" container bg p-7 w-5/6 text-center mt-3">
           <div className=" relative justify-center  shrink mt-5 max-w-fit  menu menu-horizontal  bg-base-200 rounded-box ">
               <li onClick={()=>{
                   getProductsByCateogry("Game")
@@ -120,9 +126,9 @@ function ShowProducts(props) {
                 }}>Watch</Link>
               </li>
             </div>
-            <div className=" mt-5 ">
-              <div className="row mr-1">
-                {products.map((product) => {
+            <div className="mt-5 ">
+              <div className="-z-50 row mr-1">
+                {products.slice(pageNo*5-5,pageNo*5).map((product) => {
                   return (
                     <Card
                       id="show-item"
@@ -163,11 +169,13 @@ function ShowProducts(props) {
                   );
                 })}
               </div>
-            </div>
+          </div>
 
-            
+           <Pagination className="flex justify-center" shape="rounded" count={parseInt(products.length/5)} variant="outlined" onChange={
+            (e,i)=>setPageNo(i)
+           } color="secondary"/> 
           </section>
-        </>
+        </div>
       )}
       <Footer />
     </>

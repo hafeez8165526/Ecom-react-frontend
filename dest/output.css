@@ -1876,6 +1876,12 @@ html {
   border-bottom-left-radius: inherit;
 }
 
+.mockup-phone .display {
+  overflow: hidden;
+  border-radius: 40px;
+  margin-top: -25px;
+}
+
 @-webkit-keyframes progress-loading {
   50% {
     left: 107%;
@@ -2271,6 +2277,10 @@ html {
 
 .right-1 {
   right: 0.25rem;
+}
+
+.-z-50 {
+  z-index: -50;
 }
 
 .col-auto {

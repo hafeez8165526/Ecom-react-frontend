@@ -8,7 +8,9 @@ import { Card, ListGroup, ListGroupItem, ModalTitle } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { BiCapsule, BiWindowClose } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
-import LoadingLogo from './LoadingLogo';
+import LoadingLogo from "./LoadingLogo";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
   AnimatePresence,
   motion,
@@ -29,9 +31,10 @@ const gradients = [
 function Cart() {
   const [loaded, setloaded] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const navi = useNavigate();
   const getCartItems = async () => {
     const items = await axios.get(
-      `https://ecom2-backend.herokuapp.com/cart/${localStorage.getItem("uname")}/all`,
+      `http://localhost:8089/cart/${localStorage.getItem("uname")}/all`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -43,7 +46,7 @@ function Cart() {
   };
   const removeCartItem = async (productId) => {
     const items = await axios.delete(
-      `https://ecom2-backend.herokuapp.com/cart/delete/${localStorage.getItem(
+      `http://localhost:8089/cart/delete/${localStorage.getItem(
         "uname"
       )}/${productId}`,
       {
@@ -66,7 +69,7 @@ function Cart() {
       <Navabar />
 
       {loaded === false ? (
-       <LoadingLogo/>
+        <LoadingLogo />
       ) : (
         <div className="">
           <Card className=" m-auto w-3/5 min-h-full top-20 ">
@@ -103,7 +106,7 @@ function Cart() {
                     
                     "
                       >
-                        <tr className="card-title ">
+                        <div className="card-title ">
                           <ModalTitle className="m-auto  text-base font-medium">
                             {item.title}
                           </ModalTitle>
@@ -112,7 +115,7 @@ function Cart() {
                             onClick={() => removeCartItem(item.uniq_Id)}
                             className=" m-2 inline-flex justify-end font-bold hover:scale-150 cursor-pointer "
                           />
-                        </tr>
+                        </div>
                         <ListGroup className="table  m-auto text-center col-auto ">
                           <ListGroupItem className="table-row m-auto text-center ">
                             <td>Id</td>
@@ -133,6 +136,15 @@ function Cart() {
                   );
                 })}
               </AnimatePresence>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  navi("/checkout");
+                }}
+                color="secondary"
+              >
+                CheckOut
+              </Button>
             </div>
           </Card>
         </div>
