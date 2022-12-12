@@ -20,6 +20,7 @@ import {
   LayoutGroup,
   List,
 } from "framer-motion";
+import Stripe from "./Stripe";
 
 const gradients = [
   ["#00c9ff", "#92fe9d"],
@@ -136,15 +137,7 @@ function Cart() {
                   );
                 })}
               </AnimatePresence>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  navi("/checkout");
-                }}
-                color="secondary"
-              >
-                CheckOut
-              </Button>
+              <Stripe price={100}/>
             </div>
           </Card>
         </div>

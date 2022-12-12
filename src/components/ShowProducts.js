@@ -39,6 +39,7 @@ function ShowProducts(props) {
     setProducts(req.data);
     setloaded(true);
   };
+  console.log(products)
   const getProductsByCateogry = async (category) => {
     console.log(category)
     const req = await axios.get(`http://localhost:8089/products/all/${category}`, {
@@ -128,12 +129,12 @@ function ShowProducts(props) {
             </div>
             <div className="mt-5 ">
               <div className="-z-50 row mr-1">
-                {products.slice(pageNo*5-5,pageNo*5).map((product) => {
+                {products.slice(pageNo*4-4,pageNo*4).map((product) => {
                   return (
                     <Card
                       id="show-item"
                       key={product.uniq_Id}
-                      className=" cursor-pointer hover:scale-105 hover:shadow-bg-slate-600"
+                      className=" cursor-pointer w-56 hover:scale-105 hover:shadow-bg-slate-600"
                     >
                       <i
                         id="cart"
