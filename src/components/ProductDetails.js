@@ -68,7 +68,7 @@ function ProductDetails(props) {
         
         <Card id="show-item" className=" top-20">
         <Card.Title className="font-extrabold italic text-xl text-center m-auto pb-1 hover:scale-125 hover:animate-bounce">
-        <h1 className="badge badge-lg p-3 badge-info">{product.title}</h1>
+        <h1 className="badge max-w-fit  badge-lg p-3 badge-info">{product.title}</h1>
           </Card.Title>
           <Card.Body className="border-4 rounded-md">
           <ListGroup

@@ -159,7 +159,7 @@ function ShowProducts(props) {
 
                       <Card.Title
                         id="hero-name"
-                        className="max-w-fit animate__animated animate__rubberBand btn btn-ghost mt-3 text-sm capitalize"
+                        className="max-w-full  animate__animated animate__rubberBand btn btn-ghost mt-3 text-sm capitalize"
                         onClick={() => {
                           navi(`/viewProduct?id=${product.uniq_Id}`);
                         }}
